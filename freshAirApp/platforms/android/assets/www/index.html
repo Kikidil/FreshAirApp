@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 	
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+	-->
+	
+	<!--
+	Customize this policy to fit your own app's needs. For more guidance, see:
+		https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+	Some notes:
+		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+		* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+		* Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+			* Enable inline JS: add 'unsafe-inline' to default-src
+	-->
+	
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/nav_menu.css">
+	<meta charset=utf-8 />
+	<title>Fresh Air</title>
+	
+	<!-- Import pages from external html files like so... -->
+	<!-- They can then be loaded into the #page-content div via JS -->
+	<!-- <link rel="import" href="sampleContent.html" id="sampleContent_importLink"> -->
+	<!-- <link rel="import" href="geolocationData.html" id="geolocationData_importLink"> -->
+</head>
+
+<body>
+<div class="appWrapper">
+  
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-toggle"> 
+				  <span class="sr-only">Toggle navigation</span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				</a>
+				<a class="navbar-brand" href="#">FreshAir</a>
+			</div>
+			<div id="slidemenu">
+     
+				<form class="navbar-form navbar-right" role="form">
+					<div class="form-group">
+						<input type="search" placeholder="search" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+
+				<!-- @@@Need to implement chaning the active list item when navigating... -->
+				<!-- @@@Need to implement chaning the active list item when navigating... -->
+				<!-- @@@Need to implement chaning the active list item when navigating... -->
+				<ul id="navMenuList" class="nav navbar-nav">
+					<!-- <li class="active"><a href="#">Home</a></li> -->
+					<li class="active"><a class="appLink" href="#geolocationDataPage">Home</a></li>
+					<li><a class="appLink" href="#sampleContentPage">Sample Content</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+					<li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>
+							<li><a href="#">One more separated link</a></li>
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>
+							<li><a href="#">One more separated link</a></li>
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link test long title goes here</a></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul>
+					</li>
+				</ul>
+          
+			</div>
+		</div>
+	</div> <!-- End navbar -->
+  
+  
+	<!--All page content to go within this wrapper div-->
+	<!--Place content for seperate pages inside this div and set display:none when not needed...-->
+	<div id="pageContentWrapper">
+	
+		<div id="geolocationDataPage" class="pageContent container">
+			<h1 class="no-margin-top">Geolocation Data</h1>
+			<a class="appLink" href="#sampleContentPage">Sample Link</a>
+			</br></br><button id="btnGeo" type="button" class="btn btn-info">Get Geolocation Data</button></br></br>
+			<div id="geolocationData">
+			
+			</div>
+		</div><!-- /#geolocationDataPage -->	
+
+		<div id="sampleContentPage" class="pageContent container" style="display:none;">
+			<h1 class="no-margin-top">Bootstrap starter template</h1>
+			
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+			<p class="lead">Use this document as a way to quickly start any new project. All you get is this text and a mostly barebones HTML document.</p>
+		</div><!-- /#sampleContentPage -->
+	
+	
+	
+	
+	</div><!-- /#page-content -->
+ 
+</div> <!-- /.appWrapper -->
+
+<script type="text/javascript" src="cordova.js"></script><!--Generated by cordova, ignore-->
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="js/webcomponents-lite.min.js"></script> --><!-- id="webcomponentsScript"  -->
+<!-- <script type="text/javascript" src="js/HTMLImports.min.js"></script> -->
+
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/nav_menu.js"></script>
+
+</body>
+</html>
