@@ -50,7 +50,7 @@ $('a').on('click', function (e) {
 	
 })
 
-$('#btnGeo.btn').on('click', function (e) {
+$('#btnGeoGet.btn').on('click', function (e) {
 	getLocation();
 });
 
@@ -91,7 +91,7 @@ function getLocation() {
 						timestamp: position.timestamp
 						}
 		//alert(JSON.stringify(currentPosition));	
-		$('#geolocationData').append('<p>'+JSON.stringify(currentPosition)+'</p>');
+		$('#geolocationData').append('<p><strong>JSON Format</strong>: '+JSON.stringify(currentPosition)+'</p>');
 	 };
 
 	// onError Callback receives a PositionError object
