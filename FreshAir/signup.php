@@ -1,4 +1,24 @@
-<!DOCTYPE html>
+<?PHP
+/**
+ * register user
+ */
+include_once 'db_utility.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['password'] && $_POST['email']) {
+        $username = $_POST['email'];
+        $password = $_POST['password'];
+		$confirmpassword = $_POST['confirmpassword'];
+        $email = $_POST['email'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $query = "INSERT INTO members(first_name,last_name,password,email_address) "
+                . " VALUES ( '" . $firstname . "','" . $lastname . "','" . md5($password) . "','" . $email . "')";
+
+        $mysqli->query($query);
+        header('Location: index.php');
+    }
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -9,6 +29,7 @@
 	<title>Fresh Air - Create Your Own Reality</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<script type="text/javascript" src="js/myscripts.js"></script>
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -32,16 +53,16 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li class="active"><a href="index.php">Home</a></li>
 					<li><a href="statistics.php">Statistics</a></li>
-					<li><a href="aboutus.html">About Us</a></li>
-					<li><a href="awareness.html">Awareness</a></li>
+					<li><a href="aboutus.php">About Us</a></li>
+					<li><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
-							<?php
+						<?php
 						if(@$_SESSION['email_address']){
 						?>
 						<li><a href="logout.php">Logout</a></li>
@@ -52,90 +73,86 @@
 						<?php
 						}
 						?>
+							
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 
 	<!-- /.navbar -->
 
-	<!-- Header -->
 	<header id="head" class="secondary"></header>
+
+	<!-- container -->
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
-			<li class="active">About</li>
+			<li><a href="index.php">Home</a></li>
+			<li class="active">Registration</li>
 		</ol>
 
 		<div class="row">
 			
 			<!-- Article main content -->
-			<article class="col-sm-8 maincontent">
+			<article class="col-xs-12 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">User awareness</h1>
+					<h1 class="page-title">Registration</h1>
 				</header>
-				<p>
-				<ol>
-					
-						Important cases of air pollution in Brisbane
-						One of the major highlighted problems arisen to industrial cities around the world wide is 
-						air pollution during past few decades. According to Zivkovic (2013), biggest economic cities 
-						are categories in the first raw of air polluted cities as well. In the same way, significant 
-						cases around air pollution facts are mentioned over all of this description.
-					
-						Consequently, 
-						(Brisbane city Council & The South East Queensland Air Emissions Inventory, 2004) articulate that,
-						“The clean air strategy” implemented by Brisbane city council aim for certain objectives such as to 
-						minimize the releasing pollutants to the air and also to minimize the impact from air pollution on 
-						public. In addition, city council is building an environmental program to increase the air pollution quality.
-						Pursuing this further, “Fresh air app” is recommending how to innovate this idea further in order to reach
-						the accepted goals established by relevant authorities. 
-						
-					In order to develop the user awareness tracking progress, 
-						evaluation and monitoring the fresh air app would represent the possibilities with relevant functions on their website,
-						app and on air beam. Moreover, the tracking progress of the users were by following their report cards which was 
-						available on city council website. Instead of this method,  Green IT solutions are implementing a new source of plan
-						to track the progress of the users by establishing sms method linked with air beam.  However, users’ digital identity
-						would be essential to download the data through the website. So the users need to sign up with their email verification
-						in order to check the air pollution level around their area. 
-					
-					Additionally, (Queensland Government, 2006) argues that, 
-						public users who live in indoors reduce the pollution level by improving such habits as cleaning (using lemon or vanilla 
-						air fresheners ) inside the houses, renovating, using wood heaters during winter period, pest control and etc. Brisbane city
-						council provides an active transport strategy in cycling and walking around urban areas to reduce the traffic jam and air pollution as well. 
-						Continuing this idea , the transportation matter related the air quality level directly so establishing a way to concentrate 
-						the percentage of gaseous pollutants such as CO, NO, and SO2. Despite of these findings, collaborating with regional partners 
-						is essential before engaging with the users who live in  remote areas of Queensland. Pursing this further, Zivkovic (2013) shows that, 
-						as a new step of the Brisbane air quality strategy a significant number of natural gas buses are planning to join the translink service 
-						in order to deliver a meaningful message to potential users how the government is taking action against the air pollution. Overall, 
-						all these cases are significant to motivate the users  to aware about the current situation and what are the steps they need to follow 
-						to make the air Brisbane city clean and fresh. 
-					
-				</ol>
-				</p>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Register a new account</h3>
+							<p class="text-center text-muted">If you have and account please, <a href="signin.php">Login</a> </p>
+							<hr>
+
+							<form method="post" name="form" action="signup.php" onsubmit="return validateForm()">
+								<div class="top-margin">
+									<label>First Name</label>
+									<input type="text" class="form-control" name="firstname">
+								</div>
+								<div class="top-margin">
+									<label>Last Name</label>
+									<input type="text" class="form-control" name="lastname">
+								</div>
+								<div class="top-margin">
+									<label>Email Address <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" name="email">
+								</div>
+
+								<div class="top-margin">
+										<label>Password <span class="text-danger">*</span></label>
+										<input type="password" class="form-control" name="password">
+								</div>
+								
+								<!--<div class="col-sm-6"> -->
+								<div class="top-margin">									
+										<label>Confirm Password <span class="text-danger">*</span></label>
+										<input type="password" class="form-control" name="confirmpassword">
+								</div>
+						</div>
+
+								<hr>
+
+								<div class="row">
+									<div class="col-lg-8">
+										 <button class="btn btn-action" type="submit">Register</button>                     
+									</div>
+									<div class="col-lg-4 text-right">
+										
+										<button class="btn btn-action" type="reset">Reset</button>   
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
 				
 			</article>
 			<!-- /Article -->
-			
-			<!-- Sidebar -->
-			<aside class="col-sm-4 sidebar sidebar-right">
-
-				<div class="widget">
-					<h4>Know more about us</h4>
-					<ul class="list-unstyled list-spaces">
-						<li><a href="index.html">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
-						<li><a href="index.html">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
-						
-					</ul>
-				</div>
-
-			</aside>
-			<!-- /Sidebar -->
 
 		</div>
 	</div>	<!-- /container -->
-	
-
 
 
 	
@@ -182,7 +199,7 @@
 			</div>
 		</div>
 
-				<div class="footer2">
+		<div class="footer2">
 			<div class="container">
 				<div class="row">
 					
@@ -190,9 +207,9 @@
 						<div class="widget-body">
 							<p class="simplenav">
 								<a href="index.php">Home</a> | 
-								<a href="aboutus.html">About</a> |
+								<a href="aboutus.php">About</a> |
 								<a href="index.php">Map</a> |
-								<a href="contactus.html">Contact</a> |
+								<a href="contactus.php">Contact</a> |
 								<b><a href="signup.php">Sign up</a></b>
 							</p>
 						</div>

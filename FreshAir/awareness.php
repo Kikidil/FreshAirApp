@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?PHP
+/**
+ * index page
+ * default page for user
+ */
+include_once 'db_utility.php';
+session_start();
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -32,14 +40,14 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li class="active"><a href="index.php">Home</a></li>
 					<li><a href="statistics.php">Statistics</a></li>
-					<li><a href="aboutus.html">About Us</a></li>
-					<li><a href="awareness.html">Awareness</a></li>
+					<li><a href="aboutus.php">About Us</a></li>
+					<li><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
 							<?php
 						if(@$_SESSION['email_address']){
@@ -63,7 +71,7 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li class="active">About</li>
 		</ol>
 
@@ -123,8 +131,8 @@
 				<div class="widget">
 					<h4>Know more about us</h4>
 					<ul class="list-unstyled list-spaces">
-						<li><a href="index.html">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
-						<li><a href="index.html">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
+						<li><a href="index.php">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
+						<li><a href="index.php">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
 						
 					</ul>
 				</div>
@@ -190,9 +198,9 @@
 						<div class="widget-body">
 							<p class="simplenav">
 								<a href="index.php">Home</a> | 
-								<a href="aboutus.html">About</a> |
+								<a href="aboutus.php">About</a> |
 								<a href="index.php">Map</a> |
-								<a href="contactus.html">Contact</a> |
+								<a href="contactus.php">Contact</a> |
 								<b><a href="signup.php">Sign up</a></b>
 							</p>
 						</div>

@@ -11,14 +11,14 @@ function validateForm() {
                 return false;
             }
 
-            var x2 = document.forms["form"]["repeat_password"].value;
+            var x2 = document.forms["form"]["confirmpassword"].value;
             if (x2 == null || x2 == "") {
                 alert("Password must be filled out");
                 return false;
             }
 
             if (x1 != x2) {
-                alert("Password not mach");
+                alert("Password does not match");
                 return false;
             }
             

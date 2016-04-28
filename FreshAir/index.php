@@ -6,8 +6,6 @@
 include_once 'db_utility.php';
 session_start();
 
-
-
 if (!isset($_POST['suburb'])) {
 	$query = "select * from items order by item_id";
 	} else {
@@ -214,16 +212,26 @@ echo "var item_id = " . json_encode($data) . ";\n";
 					<div class="navbar-header">
 						<!-- Button for smallest screens -->
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-						<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+						<a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav pull-right">
 							<li class="active"><a href="index.php">Home</a></li>
 							<li><a href="statistics.php">Statistics</a></li>
-							<li><a href="aboutus.html">About Us</a></li>
-							<li><a href="awareness.html">Awareness</a></li>
-							<li><a href="contactus.php">Contact Us</a></li>
-							<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+							<li><a href="aboutus.php">About Us</a></li>
+							<li><a href="awareness.php">Awareness</a></li>
+							<li><a href="contactus.php">Contact Us</a></li>	
+							<?php
+							if(@$_SESSION['email_address']){
+							?>
+							<li><a href="logout.php">Logout</a></li>
+							<?php
+							}else{
+							?>
+							<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
+							<?php
+							}
+							?>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
@@ -427,11 +435,11 @@ echo "var item_id = " . json_encode($data) . ";\n";
 					<div class="col-md-6 widget">
 						<div class="widget-body">
 							<p class="simplenav">
-								<a href="index.html">Home</a> | 
-								<a href="aboutus.html">About</a> |
-								<a href="map.html">Map</a> |
-								<a href="contactus.html">Contact</a> |
-								<b><a href="signup.html">Sign up</a></b>
+								<a href="index.php">Home</a> | 
+								<a href="aboutus.php">About</a> |
+								<a href="index.php">Map</a> |
+								<a href="contactus.php">Contact</a> |
+								<b><a href="signup.php">Sign up</a></b>
 							</p>
 						</div>
 					</div>

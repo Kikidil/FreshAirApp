@@ -1,12 +1,43 @@
 <?PHP
 /**
- * index page
- * default page for user
+ * login page for user to login
  */
 include_once 'db_utility.php';
-session_start();
 
-?><!DOCTYPE html>
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['username'] && $_POST['password']) {
+        $username=$_POST['username'];
+        $password=$_POST['password'];        
+        
+        if($username=='admin'&&$password='admin'){
+           $_SESSION['fisrt_name']="Admin"; 
+		   session_start();
+           header('Location: index.php');
+        }
+        
+        /**
+         * we use md5 to hash password, so here we use md5 hashed password to compare
+         */
+        $query="select * from  members where email_address='$username' and password='".md5($password)."'";                 
+
+        $result = $mysqli->query($query);         
+        $row_cnt = $result->rowCount();
+        if($row_cnt!=1){
+             echo "<span id='faillogin'><b><font color='red'>Invalid username/password</font></b></div>";
+				 
+        }else{
+           $row=$result->fetch(PDO::FETCH_ASSOC);    
+			session_start();		   
+           $_SESSION['email_address']=$row['first_name']; 
+		   header('Location: index.php');
+           
+        }
+      } 
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -44,22 +75,22 @@ session_start();
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="index.php">Home</a></li>
-					<li><a href="statistics.php">Statistics</a></li>
-					<li><a href="aboutus.php">About Us</a></li>
-					<li><a href="awareness.php">Awareness</a></li>
-					<li><a href="contactus.php">Contact Us</a></li>	
-						<?php
-						if(@$_SESSION['email_address']){
-						?>
-						<li><a href="logout.php">Logout</a></li>
-						<?php
-						}else{
-						?>
-						<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
-						<?php
-						}
-						?>
+		<li class="active"><a href="index.php">Home</a></li>
+				<li><a href="statistics.php">Statistics</a></li>
+				<li><a href="aboutus.php">About Us</a></li>
+				<li><a href="awareness.php">Awareness</a></li>
+				<li><a href="contactus.php">Contact Us</a></li>
+				<?php
+				if(@$_SESSION['email_address']){
+				?>
+				<li><a href="logout.php">Logout</a></li>
+				<?php
+				}else{
+				?>
+				<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
+				<?php
+				}
+				?>
 				
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -67,67 +98,62 @@ session_start();
 	</div> 
 	<!-- /.navbar -->
 
-	<!-- Header -->
-	<header id="head" class="secondary"></header>
+		<header id="head" class="secondary"></header>
+
+	<!-- container -->
 	<div class="container">
 
 		<ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
-			<li class="active">About</li>
+			<li class="active">User access</li>
 		</ol>
 
 		<div class="row">
 			
 			<!-- Article main content -->
-			<article class="col-sm-8 maincontent">
+			<article class="col-xs-12 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">About QUT FreshAir</h1>
+					<h1 class="page-title">Sign in</h1>
 				</header>
-				<h3>QUT FreshAir offers daily AQI conditions for all suburbs and cities of Queensland:</h3>
-				<p>
-				<ol>
-					<li>
-						Air Quality Forecasts - Queensland Nationwide daily forecasts.
-					</li>
-					<li>
-						Current Air Quality Conditions - Nationwide and regional real-time ozone and particle pollution air quality maps covering all Queensland states. The maps are updated hourly.
-					</li>
-					<li>
-						Flag Program: Schools, organizations, and the community know the daily air quality conditions by using colored flags.
-					</li>
-
-				</ol>
-				</p>
-
-				<h3>About the Data</h3>
-				<p>Map and forecast data are collected using federal reference or equivalent monitoring techniques or techniques approved by the state, local or tribal monitoring agencies. To maintain "real-time" maps, the data are displayed after the end of each hour. Although preliminary data quality assessments are performed, the data in QUT FreshAir are not fully verified and validated through the quality assurance procedures monitoring organizations used to officially submit and certify data on the EPA Air Quality System (AQS).
-				<br>
-				This data sharing and centralization creates a one-stop source for real-time and forecast air quality data. The benefits include quality control, national reporting consistency, access to automated mapping methods, and data distribution to the public and other data systems.
 				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Sign in to your account</h3>
+							<p class="text-center text-muted">Sign up to get updates, news, and air quality everyday, <a href="signup.php">Register</a> feel free to sign up. </p>
+							<hr>
+							
+							<form method="post" action="signin.php" >
+								<div class="top-margin">
+									<label>Username/Email <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" name="username">
+								</div>
+								<div class="top-margin">
+									<label>Password <span class="text-danger">*</span></label>
+									<input type="password" class="form-control" name="password">
+								</div>
 
+								<hr>
+
+								<div class="row">
+									<div class="col-lg-8">
+										<b><a href="">Forgot password?</a></b>
+									</div>
+									<div class="col-lg-4 ">
+										<button class="btn btn-action" type="submit">Sign in</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
 				
 			</article>
 			<!-- /Article -->
-			
-			<!-- Sidebar -->
-			<aside class="col-sm-4 sidebar sidebar-right">
-
-				<div class="widget">
-					<h4>Know more about us</h4>
-					<ul class="list-unstyled list-spaces">
-						<li><a href="index.php">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
-						<li><a href="index.php">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
-						
-					</ul>
-				</div>
-
-			</aside>
-			<!-- /Sidebar -->
 
 		</div>
 	</div>	<!-- /container -->
-	
-
 
 
 	
@@ -174,7 +200,7 @@ session_start();
 			</div>
 		</div>
 
-				<div class="footer2">
+		<div class="footer2">
 			<div class="container">
 				<div class="row">
 					

@@ -14,8 +14,17 @@ if (!isset($_POST['suburb'])) {
 	} 
 	
 $result = $mysqli->query($query);
+$row = $result->fetch(PDO::FETCH_ASSOC);
+	//$data = array();
+   // $data_array = array();
+ //while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	// $item = array($row["suburb"], (float) $row["sound_levels"], (float) $row["temperature"], (float) $row["humidity"], (float) $row["co"], (float) $row["no2"]);
+    //    array_push($data, $item);
+     //   $data_array[] = $row;
+ //}
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -45,22 +54,29 @@ $result = $mysqli->query($query);
 </head>
 
 <body class="home">
-<script>
-	
+<script>  
+
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
 
-
+<?PHP
+		//$len = count($data);
+	//	for ($x = 0; $x < $len; $x++) {
+		//	$row = $data[$x];
+	 ?>        
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-	     ['Month', 'Chermside', 'Greenslopes', 'Virginia', 'Upper Mt Gravatt', 'Rwanda', 'Inala', 'Toowong'],
-         ['Level of Sound', 80, 99, 70, 60, 60, 60, 66],
-         ['Temperature', 20, 25, 27, 21, 20, 24, 30],
-         ['Humidity', 30, 45, 44, 47, 50, 44, 35],
-         ['CO2', 125, 100, 80, 90, 95, 110, 100],
-         ['NO2', 4, 5, 4, 4, 5, 6, 5],
+	     ['Month', '<?PHP echo $row['suburb'] ?>',],
+         ['Level of Sound', <?PHP echo $row['sound_levels'] ?>,],
+         ['Temperature', <?PHP echo $row['temperature'] ?>,],
+         ['Humidity', <?PHP echo $row['humidity'] ?>,],
+         ['CO2', <?PHP echo $row['co'] ?>,],
+         ['NO2', <?PHP echo $row['no2'] ?>,]
       ]);
+	<?PHP  
+	//  }
+	  ?>
 
     var options = {
       title : 'Daily Statistics per Suburb',
@@ -87,11 +103,22 @@ $result = $mysqli->query($query);
 				<ul class="nav navbar-nav pull-right">
 					<li class="active"><a href="index.php">Home</a></li>
 					<li><a href="statistics.php">Statistics</a></li>
-					<li><a href="aboutus.html">About Us</a></li>
-					<li><a href="awareness.html">Awareness</a></li>
+					<li><a href="aboutus.php">About Us</a></li>
+					<li><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
-				</ul>
+					<?php
+						if(@$_SESSION['email_address']){
+						?>
+						<li><a href="logout.php">Logout</a></li>
+						<?php
+						}else{
+						?>
+						<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
+						<?php
+						}
+						?>
+					</ul>
+			
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 
@@ -102,7 +129,7 @@ $result = $mysqli->query($query);
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li class="active">About</li>
 		</ol>
 
@@ -117,8 +144,8 @@ $result = $mysqli->query($query);
 				<div class="widget">
 					<h4>Know more about us</h4>
 					<ul class="list-unstyled list-spaces">
-						<li><a href="index.html">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
-						<li><a href="index.html">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
+						<li><a href="index.php">How QUT FreshAir Works: </a><br><span class="small text-muted">Want to know hoe QUT FreshAir Works</span></li>
+						<li><a href="index.php">Information on Indoor Air Quality</a><br><span class="small text-muted">What is Indoor Air Quality</span></li>
 						
 					</ul>
 				</div>
@@ -183,11 +210,11 @@ $result = $mysqli->query($query);
 					<div class="col-md-6 widget">
 						<div class="widget-body">
 							<p class="simplenav">
-								<a href="index.html">Home</a> | 
-								<a href="aboutus.html">About</a> |
-								<a href="map.html">Map</a> |
-								<a href="contactus.html">Contact</a> |
-								<b><a href="signup.html">Sign up</a></b>
+								<a href="index.php">Home</a> | 
+								<a href="aboutus.php">About</a> |
+								<a href="index.php">Map</a> |
+								<a href="contactus.php">Contact</a> |
+								<b><a href="signup.php">Sign up</a></b>
 							</p>
 						</div>
 					</div>
