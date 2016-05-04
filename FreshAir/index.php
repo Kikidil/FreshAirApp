@@ -219,19 +219,20 @@ echo "var item_id = " . json_encode($data) . ";\n";
 							<li class="active"><a href="index.php">Home</a></li>
 							<li><a href="statistics.php">Statistics</a></li>
 							<li><a href="aboutus.php">About Us</a></li>
+							<li><a href="facts.php">Facts</a></li>
 							<li><a href="awareness.php">Awareness</a></li>
-							<li><a href="contactus.php">Contact Us</a></li>	
-							<?php
-							if(@$_SESSION['email_address']){
-							?>
-							<li><a href="logout.php">Logout</a></li>
-							<?php
-							}else{
-							?>
-							<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
-							<?php
-							}
-							?>
+							<li><a href="contactus.php">Contact Us</a></li>
+									<?php
+								if(@$_SESSION['email_address']){
+								?>
+								<li><a href="logout.php">Logout</a></li>
+								<?php
+								}else{
+								?>
+								<li><a class="btn" href="signin.php">Admin Sign In</a></li>
+								<?php
+								}
+								?>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>

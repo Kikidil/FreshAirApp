@@ -4,8 +4,11 @@
  * default page for user
  */
 include_once 'db_utility.php';
-session_start();
 
+session_start();
+if(!isset($_SESSION['email_address'])){
+   header("Location:index.php");
+}
 
 if (!isset($_POST['suburb'])) {
 	$query = "select * from items order by item_id";
@@ -22,6 +25,27 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
     //    array_push($data, $item);
      //   $data_array[] = $row;
  //}
+
+if(isset($_POST['submit'])){
+	
+	$query = "select * from items where email_address like '%" . $_POST['email'] . "%'";
+	 
+	 $result = $mysqli->query($query);
+	$row = $result->fetch(PDO::FETCH_ASSOC);
+	
+    $to = $_POST['email']; // this is your Email address
+    $from = $row['email_address']; // this is the sender's Email address
+    $subject = "Data Shared";
+	$message = $first_name . " " . $last_name . " wrote the following:" . "\n\n" . $_POST['message'];
+    $message2 = "http://localhost/FreshAir/signin.php";
+
+    $headers = "From:" . $from;
+    $headers2 = "From:" . $to;
+    mail($to,$subject,$message,$headers);
+    echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+    // You can also use header('Location: thank_you.php'); to redirect to another page.
+    }
+
 
 ?>
 <!DOCTYPE html>
@@ -101,19 +125,20 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="index.php">Home</a></li>
-					<li><a href="statistics.php">Statistics</a></li>
+					<li><a href="index.php">Home</a></li>
+					<li  class="active"><a href="statistics.php">Statistics</a></li>
 					<li><a href="aboutus.php">About Us</a></li>
+					<li class="current_page_item"><a href="facts.php">Facts</a></li>
 					<li><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
-					<?php
+						<?php
 						if(@$_SESSION['email_address']){
 						?>
 						<li><a href="logout.php">Logout</a></li>
 						<?php
 						}else{
 						?>
-						<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
+						<li><a class="btn" href="signin.php">Admin Sign In</a></li>
 						<?php
 						}
 						?>
@@ -130,12 +155,32 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
 
 		<ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
-			<li class="active">About</li>
+			<li class="active">Statistics</li>
 		</ol>
 
 		<div class="row">
 			
-			 <div id="chart_div" style="width: 1200px; height: 600px;"></div
+			 <div id="chart_div" style="width: 1200px; height: 600px;"></div>
+			 <form method="post" action="statistics.php" >
+								<div class="top-margin">
+									<h3>Share data with:</h3></br>
+									<label>Username/Email <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" name="email">
+								</div>
+								<div class="top-margin">
+									<label>Temporal Password <span class="text-danger">*</span></label>
+									<input type="password" class="form-control" name="password">
+								</div>
+								
+								<label>Message: <span class="text-danger">*</span></label></br><br><textarea rows="5" name="message" cols="30"></textarea><br>
+
+								<hr>
+							
+									<div class="col-lg-4 ">
+										<button class="btn btn-action" type="submit">Share</button>
+									</div>
+								</div>
+							</form>
 		
 			
 			<!-- Sidebar -->

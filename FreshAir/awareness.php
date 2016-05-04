@@ -46,21 +46,22 @@ session_start();
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="index.php">Home</a></li>
-					<li><a href="statistics.php">Statistics</a></li>
-					<li><a href="aboutus.php">About Us</a></li>
-					<li class="current_page_item"><a href="awareness.php">Awareness</a></li>
-					<li><a href="contactus.php">Contact Us</a></li>
+						<li><a href="statistics.php">Statistics</a></li>
+						<li><a href="aboutus.php">About Us</a></li>
+						<li><a href="facts.php">Facts</a></li>
+						<li class="active"><a href="awareness.php">Awareness</a></li>
+						<li><a href="contactus.php">Contact Us</a></li>
+								<?php
+							if(@$_SESSION['email_address']){
+							?>
+							<li><a href="logout.php">Logout</a></li>
 							<?php
-						if(@$_SESSION['email_address']){
-						?>
-						<li><a href="logout.php">Logout</a></li>
-						<?php
-						}else{
-						?>
-						<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
-						<?php
-						}
-						?>
+							}else{
+							?>
+							<li><a class="btn" href="signin.php">Admin Sign In</a></li>
+							<?php
+							}
+							?>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -73,7 +74,7 @@ session_start();
 
 		<ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
-			<li class="active">About</li>
+			<li class="active">Awarenessnes</li>
 		</ol>
 
 		<div class="row">
@@ -83,6 +84,9 @@ session_start();
 				<header class="page-header">
 					<h1 class="page-title">User awareness</h1>
 				</header>
+				<div class="">
+						<div><img src="images/awareness.jpg" width="1000" height="1400" alt="" /></div>
+					</div>
 				<p>
 				<ol>
 					

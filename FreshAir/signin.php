@@ -11,12 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username=$_POST['username'];
         $password=$_POST['password'];        
         
-        if($username=='admin'&&$password='admin'){
-           $_SESSION['fisrt_name']="Admin"; 
-		   session_start();
-           header('Location: index.php');
-        }
-        
+               
         /**
          * we use md5 to hash password, so here we use md5 hashed password to compare
          */
@@ -27,7 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($row_cnt!=1){
              echo "<span id='faillogin'><b><font color='red'>Invalid username/password</font></b></div>";
 				 
-        }else{
+        }
+		if($username=='admin'&&$password='admin'){
+          session_start();
+		  $_SESSION['email_address']='admin';		   
+           header('Location: statistics.php');
+        }
+		else{
            $row=$result->fetch(PDO::FETCH_ASSOC);    
 			session_start();		   
            $_SESSION['email_address']=$row['first_name']; 
@@ -75,23 +76,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-		<li class="active"><a href="index.php">Home</a></li>
-				<li><a href="statistics.php">Statistics</a></li>
-				<li><a href="aboutus.php">About Us</a></li>
-				<li><a href="awareness.php">Awareness</a></li>
-				<li><a href="contactus.php">Contact Us</a></li>
-				<?php
-				if(@$_SESSION['email_address']){
-				?>
-				<li><a href="logout.php">Logout</a></li>
-				<?php
-				}else{
-				?>
-				<li><a class="btn" href="signin.php">SIGN IN / SIGN UP</a></li>
-				<?php
-				}
-				?>
-				
+
+					<li><a href="index.php">Home</a></li>
+					<li><a href="statistics.php">Statistics</a></li>
+					<li><a href="aboutus.php">About Us</a></li>
+					<li><a href="facts.php">Facts</a></li>
+					<li><a href="awareness.php">Awareness</a></li>
+					<li><a href="contactus.php">Contact Us</a></li>
+							<?php
+						if(@$_SESSION['email_address']){
+						?>
+						<li><a href="logout.php">Logout</a></li>
+						<?php
+						}else{
+						?>
+						<li><a class="btn" href="signin.php">Admin Sign In</a></li>
+						<?php
+						}
+						?>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -120,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h3 class="thin text-center">Sign in to your account</h3>
-							<p class="text-center text-muted">Sign up to get updates, news, and air quality everyday, <a href="signup.php">Register</a> feel free to sign up. </p>
+							
 							<hr>
 							
 							<form method="post" action="signin.php" >
