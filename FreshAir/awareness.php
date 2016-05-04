@@ -6,7 +6,8 @@
 include_once 'db_utility.php';
 session_start();
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -44,10 +45,10 @@ session_start();
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="index.php">Home</a></li>
+					<li><a href="index.php">Home</a></li>
 					<li><a href="statistics.php">Statistics</a></li>
 					<li><a href="aboutus.php">About Us</a></li>
-					<li><a href="awareness.php">Awareness</a></li>
+					<li class="current_page_item"><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
 							<?php
 						if(@$_SESSION['email_address']){
