@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         /**
          * we use md5 to hash password, so here we use md5 hashed password to compare
          */
-        $query="select * from  members where email_address='$username' and password='".md5($password)."'"; 
+        $query="select * from  tempmembers where email_address='$username' and password='".md5($password)."'"; 
         $result = $mysqli->query($query); 
         $row=$result->fetch(PDO::FETCH_ASSOC);          
         $row_cnt = $result->rowCount();
@@ -18,20 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($row_cnt!=1){
              echo "<span id='faillogin'><b><font color='red'>Invalid username/password</font></b></div>";				 
         }
-		  if($username==$row['email_address']&&$password=$row['password']){	
-		   if($username=='admin'){
-				session_start();
-				$_SESSION['Yes']='admin';		   
-				header('Location: statistics.php');
-			}
-			else {
-			session_start();			
-			$_SESSION['No']=$row['first_name']; 
-			header('Location: index.php');  
+		if($username==$row['email_address']&&$password=$row['password']){	
+				echo "tessss";
+		   	
+				
+		  }else {
+			echo "<span id='faillogin'><b><font color='red'>Invalid username/password</font></b></div>";	
 		   }
-      } 
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<li><a href="awareness.php">Awareness</a></li>
 					<li><a href="contactus.php">Contact Us</a></li>
 <?php
-if(@$_SESSION['email_address'] || @$_SESSION['admin']){
+if(@$_SESSION['Yes'] || @$_SESSION['No']){
 ?>
 <li><a href="logout.php">Logout</a></li>
 <?php
@@ -102,7 +98,7 @@ if(@$_SESSION['email_address'] || @$_SESSION['admin']){
 
 		<ol class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
-			<li class="active">User access</li>
+			<li class="active">Temporal User access</li>
 		</ol>
 
 		<div class="row">
@@ -110,16 +106,14 @@ if(@$_SESSION['email_address'] || @$_SESSION['admin']){
 			<!-- Article main content -->
 			<article class="col-xs-12 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Sign in</h1>
+					<h1 class="page-title">Temporal User Login<h1>
 				</header>
 				
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">Sign in to your account</h3>
-							<p class="text-center text-muted">If you are an invited User please, <a href="signinTemp.php">Login</a> </p>
-							
-							
+							<h3 class="thin text-center">Temporal User Login</h3>
+														
 							<hr>
 							
 							<form method="post" action="signin.php" >

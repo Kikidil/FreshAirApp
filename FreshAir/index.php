@@ -1,19 +1,16 @@
 <?PHP
-/**
- * index page
- * default page for user
- */
-include_once 'db_utility.php';
 session_start();
-
-if (!isset($_POST['suburb'])) {
+/**
+* index page
+* default page for user
+*/
+include_once 'db_utility.php';
+if (!isset($_POST['suburb'])){
 	$query = "select * from items order by item_id";
-	} else {
-		$query = "select * from items where suburb like '%" . $_POST['suburb'] . "%' order by item_id";
-	} 
-	
+}else{
+$query = "select * from items where suburb like '%" . $_POST['suburb'] . "%' order by item_id";
+}
 $result = $mysqli->query($query);
-
 ?>
 <!DOCTYPE html>
 
@@ -41,19 +38,19 @@ $result = $mysqli->query($query);
 	
  <script>
                 function initialize() {
-    <?php
-    /**
-     *  following is to generate a markers from php code     
-     */
-    $data = array();
-    $data_array = array();
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        $item = array($row["item_id"], (float) $row["latitude"], (float) $row["longitude"]);
-        array_push($data, $item);
-        $data_array[] = $row;
-    }
-    echo "var markers = " . json_encode($data) . ";\n";
-    ?>
+<?php
+/**
+ *  following is to generate a markers from php code     
+ */
+$data = array();
+$data_array = array();
+while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+	$item = array($row["item_id"], (float) $row["latitude"], (float) $row["longitude"]);
+	array_push($data, $item);
+	$data_array[] = $row;
+	}
+echo "var markers = " . json_encode($data) . ";\n";
+?>
 
 		/*/if(navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
@@ -222,17 +219,17 @@ echo "var item_id = " . json_encode($data) . ";\n";
 							<li><a href="facts.php">Facts</a></li>
 							<li><a href="awareness.php">Awareness</a></li>
 							<li><a href="contactus.php">Contact Us</a></li>
-									<?php
-								if(@$_SESSION['email_address']){
-								?>
-								<li><a href="logout.php">Logout</a></li>
-								<?php
-								}else{
-								?>
-								<li><a class="btn" href="signin.php">Admin Sign In</a></li>
-								<?php
-								}
-								?>
+<?php
+if(@$_SESSION['No'] || @$_SESSION['Yes']){
+?>
+<li><a href="logout.php">Logout</a></li>
+<?php
+}else{
+?>
+<li><a class="btn" href="signin.php">Admin Sign In</a></li>
+<?php
+}
+?>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
@@ -267,23 +264,23 @@ echo "var item_id = " . json_encode($data) . ";\n";
                     <th>NO2</th>
 					<th>Heart Rate</th>
 				    <tr/>
-                <?PHP
-                $len = count($data_array);
-                for ($x = 0; $x < $len; $x++) {
-                    $row = $data_array[$x];
-                    ?>
-                    <tr>   
-                        <td><?PHP echo $row['suburb'] ?></td>
-                        <td><?PHP echo $row['sound_levels'] ?></td>   
-                        <td><?PHP echo $row['temperature'] ?></td>       
-						<td><?PHP echo $row['humidity'] ?></td>   
-                        <td><?PHP echo $row['co'] ?></td> 
-						<td><?PHP echo $row['no2'] ?></td> 		
-						<td><?PHP echo $row['heartrate'] ?></td> 							
-                    </tr>  
-                    <?PHP
-                }
-                ?>                                
+<?PHP
+$len = count($data_array);
+for ($x = 0; $x < $len; $x++) {
+	$row = $data_array[$x];
+	?>
+	<tr>   
+		<td><?PHP echo $row['suburb']?></td>
+		<td><?PHP echo $row['sound_levels']?></td>   
+		<td><?PHP echo $row['temperature']?></td>       
+		<td><?PHP echo $row['humidity']?></td>   
+		<td><?PHP echo $row['co']?></td> 
+		<td><?PHP echo $row['no2']?></td> 		
+		<td><?PHP echo $row['heartrate']?></td> 							
+	</tr>  
+	<?PHP
+}
+?>                                
             </table>
         </div>        
 				<div class="container">

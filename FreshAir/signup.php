@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $lastname = $_POST['lastname'];
         $query = "INSERT INTO members(first_name,last_name,password,email_address) "
                 . " VALUES ( '" . $firstname . "','" . $lastname . "','" . md5($password) . "','" . $email . "')";
-
         $mysqli->query($query);
         header('Location: index.php');
     }
