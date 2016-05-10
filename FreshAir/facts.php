@@ -5,7 +5,6 @@
  */
 include_once 'db_utility.php';
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,17 +50,17 @@ session_start();
 						<li  class="active"><a href="facts.php">Facts</a></li>
 						<li><a href="awareness.php">Awareness</a></li>
 						<li><a href="contactus.php">Contact Us</a></li>
-								<?php
-							if(@$_SESSION['email_address']){
-							?>
-							<li><a href="logout.php">Logout</a></li>
-							<?php
-							}else{
-							?>
-							<li><a class="btn" href="signin.php">Admin Sign In</a></li>
-							<?php
-							}
-							?>
+<?php
+if(@$_SESSION['No'] || @$_SESSION['Yes']){
+?>
+<li><a href="logout.php">Logout</a></li>
+<?php
+}else{
+?>
+<li><a class="btn" href="signin.php">Admin Sign In</a></li>
+<?php
+}
+?>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -85,7 +84,7 @@ session_start();
 					<h1 class="page-title">Facts</h1>
 				</header>
 					<div class="">
-						<div><img src="images/facts.jpg" width="1000" height="1400" alt="" /></div>
+						<div><img src="images/facts.JPG" width="1000" height="1400" alt="" /></div>
 					</div>
 			</article>
 			<!-- /Article -->
